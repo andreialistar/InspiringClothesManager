@@ -8,16 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".messy.FirstPageActivity">
-        </activity>
-        <activity android:name=".messy.BigImageActivity" />
-        <activity
-            android:name=".messy.BigGridActivity"
-            android:label="@string/title_activity_big_grid">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.support.v7.app.AppCompatActivity" />
-        </activity>
         <activity android:name=".trending.TrendingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
