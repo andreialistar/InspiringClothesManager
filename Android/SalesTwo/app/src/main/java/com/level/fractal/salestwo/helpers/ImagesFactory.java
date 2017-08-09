@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class ImagesFactory {

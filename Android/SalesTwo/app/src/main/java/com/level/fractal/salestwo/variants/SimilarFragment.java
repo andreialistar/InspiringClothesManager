@@ -1,16 +1,12 @@
 package com.level.fractal.salestwo.variants;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +19,6 @@ public class SimilarFragment extends Fragment {
     private int numPages;
 
     public static SimilarFragment create(int pageNumber) {
-        Log.d("Intercept", String.valueOf(pageNumber));
         SimilarFragment fragment = new SimilarFragment();
         Bundle args = new Bundle();
         args.putInt(SalesConstants.BUNDLE_PAGE_NUMBER, pageNumber);
@@ -40,10 +35,6 @@ public class SimilarFragment extends Fragment {
 
         ViewPager variantsPager = (ViewPager) rootView.findViewById(R.id.variantsPager);
         setNumPages(5);
-//        Bundle bigPagerBundle = getIntent().getExtras();
-//        if (bigPagerBundle != null) {
-//            setNumPages(bigPagerBundle.getInt("numPages"));
-//        }
 
         VariantsPagerAdapter bigAdapter = new VariantsPagerAdapter(getActivity(), getChildFragmentManager());
         variantsPager.setAdapter(bigAdapter);
@@ -74,7 +65,7 @@ public class SimilarFragment extends Fragment {
     private class VariantsPagerAdapter extends FragmentPagerAdapter {
         Context context=null;
 
-        public VariantsPagerAdapter(Context context, FragmentManager fm) {
+        VariantsPagerAdapter(Context context, FragmentManager fm) {
             super(fm);
             this.context = context;
         }

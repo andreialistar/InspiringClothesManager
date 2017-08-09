@@ -3,21 +3,13 @@ package com.level.fractal.salestwo.variants;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.level.fractal.salestwo.R;
-import com.level.fractal.salestwo.helpers.Debuggers;
-import com.level.fractal.salestwo.helpers.ImagesFactory;
 import com.level.fractal.salestwo.helpers.ResourcesLoader;
 import com.level.fractal.salestwo.helpers.SalesConstants;
-import com.level.fractal.salestwo.messy.BigImageView;
-import com.level.fractal.salestwo.messy.FirstPageActivity;
-
-import java.util.Arrays;
 
 public class VariantsFragment extends Fragment {
     private int variantsNumber;

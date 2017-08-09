@@ -3,9 +3,6 @@ package com.level.fractal.salestwo.helpers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.level.fractal.salestwo.variants.VariantsActivity;
 
 import java.util.Map;
 
@@ -24,8 +21,6 @@ public class IntentManager {
             }
             intent.putExtras(b);
         }
-
-        Log.d("TrendingLog", "Open " + cls.getCanonicalName() + " from " + context.getPackageName());
 
         context.startActivity(intent);
     }

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -27,14 +26,11 @@ public class EndlessView extends View {
     private int viewWidth;
     private int viewHeight;
 
-    private int size = 100;
     private int padding = 8;
 
     private float panDx = padding;
     private float panDy = padding;
     private float scaleFactor = 1;
-    private float minScaleFactor = 0.9f;
-    private float maxScaleFactor = 3f;
 
     private boolean hasIntent;
 
@@ -61,26 +57,17 @@ public class EndlessView extends View {
 
         int sqrt = (int)(Math.sqrt(smallImages.length));
 
-        boolean hasLogged = false;
         for (int i = 0; i < sqrt; i++)
         {
             for (int j = 0; j < sqrt; j++)
             {
+                int size = 100;
                 int interval = size * sqrt;
 
                 left = size * j;
                 top = size * i;
                 int offsetX = MathUtils.ClosestIntervalStepToPoint(interval, left - (-(int)panDx + viewWidth / 2));
                 int offsetY = MathUtils.ClosestIntervalStepToPoint(interval, top - (-(int)panDy + viewHeight / 2));
-//                if (offsetX != 0) {
-//                    Log.d("Offset", String.format("i: %d, j: %d, panDx: %d, viewWidth: %d, left: %d, offset: %d",
-//                            i, j, (int)panDx, viewWidth, left, offsetX));
-//                }
-//                if (offsetY != 0 && !hasLogged) {
-//                    hasLogged = true;
-//                    Log.d("Offset", String.format("i: %d, j: %d, panDy: %d, viewHeight: %d, top: %d, offset: %d",
-//                            i, j, (int)panDy, viewHeight, top, offsetY));
-//                }
                 left -= offsetX;
                 top -= offsetY;
                 right = left + size;
@@ -97,9 +84,6 @@ public class EndlessView extends View {
             }
         }
 
-        Log.d("UpdateDraw", String.format("scale: %f, left: %d, top: %d, right: %d, bottom: %d",
-                scaleFactor, minLeft, minTop, maxRight, maxBottom));
-
         canvas.restore();
     }
 
@@ -113,9 +97,10 @@ public class EndlessView extends View {
 
     public void UpdateScale(float ds)
     {
-        float beforeScale = scaleFactor;
         scaleFactor *= ds;
+        float minScaleFactor = 0.9f;
         scaleFactor = Math.max(minScaleFactor, scaleFactor);
+        float maxScaleFactor = 3f;
         if (scaleFactor > maxScaleFactor) {
             if (!hasIntent) {
                 hasIntent = true;
@@ -124,28 +109,17 @@ public class EndlessView extends View {
             }
         }
         else {
-            float change = -size * scaleFactor * (1 - scaleFactor / beforeScale) * 0.5f;
-            if (change != 0) {
-//                UpdateScroll(change, change);
-            }
-            else {
-                invalidate();
-            }
+            invalidate();
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        boolean resultPan = panDetector.onTouchEvent(event);
-        boolean resultScale = scaleDetector.onTouchEvent(event);
+        panDetector.onTouchEvent(event);
+        scaleDetector.onTouchEvent(event);
 
-        boolean result = resultPan && resultScale;
-
-        if (!result) {
-            return true;
-        }
-        return result;
+        return true;
     }
 
     private void init() {
@@ -172,8 +146,6 @@ public class EndlessView extends View {
 
                     viewWidth = view.getWidth();
                     viewHeight = view.getHeight();
-
-                    Log.d("Kiki", String.format("%d-%d", viewWidth, viewHeight));
                 }
             });
         }

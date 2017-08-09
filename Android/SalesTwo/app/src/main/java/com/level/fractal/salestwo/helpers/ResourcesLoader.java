@@ -1,7 +1,5 @@
 package com.level.fractal.salestwo.helpers;
 
-import android.util.Log;
-
 import com.level.fractal.salestwo.R;
 
 public class ResourcesLoader {
@@ -25,11 +23,9 @@ public class ResourcesLoader {
             }
         }
         if (path.contains("Variants")) {
-            Log.d("Intercept", path);
             int[] variant = new int[5];
             for (int i = 0; i < 5; i++) {
                 int pivot = Integer.parseInt(path.substring(path.length() - 1));
-                Log.d("Intercept", String.valueOf(pivot));
                 variant[i] = allImages[pivot * 5 + i];
             }
 

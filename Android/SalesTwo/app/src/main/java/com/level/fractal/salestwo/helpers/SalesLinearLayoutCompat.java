@@ -3,7 +3,6 @@ package com.level.fractal.salestwo.helpers;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 public class SalesLinearLayoutCompat extends LinearLayoutCompat {
@@ -21,21 +20,6 @@ public class SalesLinearLayoutCompat extends LinearLayoutCompat {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        float x = e.getX();
-        float y = e.getY();
-
-        Log.d("TouchingM", String.valueOf(y));
-
         return super.onTouchEvent(e);
     }
-
-//    @Override
-//    public boolean onInterceptTouchEvent (MotionEvent e) {
-//        float x = e.getX();
-//        float y = e.getY();
-//
-//        Log.d("TouchingI", String.valueOf(y));
-//
-//        return false;
-//    }
 }

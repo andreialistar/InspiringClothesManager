@@ -30,10 +30,6 @@ public class VariantsActivity extends AppCompatActivity implements
 
         similarPager = (SimilarViewPager) findViewById(R.id.similarPager);
         setNumPages(5);
-//        Bundle bigPagerBundle = getIntent().getExtras();
-//        if (bigPagerBundle != null) {
-//            setNumPages(bigPagerBundle.getInt("numPages"));
-//        }
 
         SimilarPagerAdapter bigAdapter = new SimilarPagerAdapter(getSupportFragmentManager());
         similarPager.setAdapter(bigAdapter);
@@ -64,7 +60,6 @@ public class VariantsActivity extends AppCompatActivity implements
     }
 
     public void TrackScroll(MotionEvent event1, MotionEvent event2) {
-        Log.d("Intercept", "track");
         if (Math.abs(event1.getY() - event2.getY()) > 600 && !hasIntent) {
             hasIntent = true;
             similarPager.setCurrentItem(similarPager.getCurrentItem() + (int)Math.signum(event1.getY() - event2.getY()));

@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -30,8 +29,6 @@ public class VariantsImageView extends View {
     private float panDx = padding;
     private float panDy = padding;
     private float scaleFactor = 1;
-    private float minScaleFactor = 0.6f;
-    private float maxScaleFactor = 4f;
 
     private boolean hasIntent;
 
@@ -72,32 +69,12 @@ public class VariantsImageView extends View {
         invalidate();
     }
 
-    public void UpdateFling(float dx, float dy)
-    {
-//        if (Math.abs(dy) > 2 * Math.abs(dx))
-//        {
-//            int neighborIndex = bigImagePrefixIndex - (int)Math.signum(dy);
-//            neighborIndex = Math.max(0, neighborIndex);
-//            neighborIndex = Math.min(FirstPageActivity.articlePrefixes.length - 1, neighborIndex);
-//            Log.d("ChosenIndex", String.valueOf(neighborIndex));
-//            FirstPageActivity.OpenBigImageActivity(null, FirstPageActivity.articlePrefixes[neighborIndex], FirstPageActivity.articleNumSamples[neighborIndex], null);
-//        }
-    }
-
-    public void UpdateTouchedImage(int x, int y)
-    {
-//        int ux = (int)(1.0f * (x - scrollDx) / scaleFactor);
-//        int uy = (int)(1.0f * (y - scrollDy) / scaleFactor);
-//        int ox = ux / 100;
-//        int oy = uy / 100;
-//        Log.d("Touch update", String.format("dx: %d, dy: %d, sx: %d, sy: %d, px: %d, py: %d", x, y, ux, uy, ox, oy));
-    }
-
     public void UpdateScale(float ds)
     {
-        float beforeScale = scaleFactor;
         scaleFactor *= ds;
+        float maxScaleFactor = 4f;
         scaleFactor = Math.min(maxScaleFactor, scaleFactor);
+        float minScaleFactor = 0.6f;
         if (scaleFactor < minScaleFactor) {
             if (!hasIntent) {
                 hasIntent = true;
@@ -106,28 +83,17 @@ public class VariantsImageView extends View {
             }
         }
         else {
-            float change = -size * scaleFactor * (1 - scaleFactor / beforeScale) * 0.5f;
-            if (change != 0) {
-//                UpdateScroll(change, change);
-            }
-            else {
-                invalidate();
-            }
+            invalidate();
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        boolean resultPan = panDetector.onTouchEvent(event);
-        boolean resultScale = scaleDetector.onTouchEvent(event);
+        panDetector.onTouchEvent(event);
+        scaleDetector.onTouchEvent(event);
 
-        boolean result = resultPan && resultScale;
-
-        if (!result) {
-            return true;
-        }
-        return result;
+        return true;
     }
 
     private void init() {
@@ -146,8 +112,6 @@ public class VariantsImageView extends View {
                     viewWidth = view.getWidth();
                     viewHeight = view.getHeight();
 
-                    Log.d("Kiki", String.format("%d-%d", viewWidth, viewHeight));
-
                     size = Math.min(viewWidth, viewHeight) - 2 * padding;
                 }
             });
@@ -159,7 +123,6 @@ public class VariantsImageView extends View {
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            Log.d("BigImageScroll", String.format("e1: %d, e2: %d, dx: %f, dy: %f", e1.getAction(), e2.getAction(), distanceX, distanceY));
             UpdateScroll(distanceX, distanceY);
 
             return true;
@@ -167,15 +130,11 @@ public class VariantsImageView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Log.d("BigImageFling", String.format("e1: %d, e2: %d, dx: %f, dy: %f", e1.getAction(), e2.getAction(), velocityX, velocityY));
-            UpdateFling(velocityX, velocityY);
-
             return true;
         }
 
         @Override
         public boolean onDown(MotionEvent e) {
-            Log.d("BigImageDown", String.format("e: %d", e.getAction()));
             hasIntent = false;
 
             return true;
@@ -183,9 +142,6 @@ public class VariantsImageView extends View {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            Log.d("BigImageTap", String.format("e: %d", e.getAction()));
-            UpdateTouchedImage((int)e.getX(), (int)e.getY());
-
             return true;
         }
     }

@@ -1,10 +1,8 @@
 package com.level.fractal.salestwo.trending;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,27 +33,27 @@ public class TrendingFragment extends Fragment {
         LinearLayoutCompat layout = (LinearLayoutCompat)rootView.findViewById(R.id.trendingLayout);
 
         if (pageNumber == 0) {
-            int[] imgsIds = ResourcesLoader.GetImagesIds("Trending1");
-            for (int i = 0; i < imgsIds.length; i++) {
+            int[] imagesIds = ResourcesLoader.GetImagesIds("Trending1");
+            for (int imageId : imagesIds) {
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         IntentManager.OpenActivity(v.getContext(), VariantsActivity.class, null);
                     }
                 };
-                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imgsIds[i], listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 500);
+                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 500);
             }
         }
         else if (pageNumber == 1) {
-            int[] imgsIds = ResourcesLoader.GetImagesIds("Trending2");
-            for (int i = 0; i < imgsIds.length; i++) {
+            int[] imagesIds = ResourcesLoader.GetImagesIds("Trending2");
+            for (int imageId : imagesIds) {
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         IntentManager.OpenActivity(v.getContext(), VariantsActivity.class, null);
                     }
                 };
-                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imgsIds[i], listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 400);
+                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 400);
             }
         }
 
