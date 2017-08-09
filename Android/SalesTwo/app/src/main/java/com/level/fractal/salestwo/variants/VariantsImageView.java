@@ -111,6 +111,7 @@ public class VariantsImageView extends View {
                     }
                     viewWidth = view.getWidth();
                     viewHeight = view.getHeight();
+                    panDy = (viewHeight - viewWidth) / 2;
 
                     size = Math.min(viewWidth, viewHeight) - 2 * padding;
                 }
