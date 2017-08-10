@@ -41,7 +41,7 @@ public class TrendingFragment extends Fragment {
                         IntentManager.OpenActivity(v.getContext(), VariantsActivity.class, null);
                     }
                 };
-                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 500);
+                ImagesFactory.AddImageCardToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 500);
             }
         }
         else if (pageNumber == 1) {
@@ -53,7 +53,7 @@ public class TrendingFragment extends Fragment {
                         IntentManager.OpenActivity(v.getContext(), VariantsActivity.class, null);
                     }
                 };
-                ImagesFactory.AddSimpleImageToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 400);
+                ImagesFactory.AddImageCardToLinearLayout(this.getContext(), layout, imageId, listener, LinearLayoutCompat.LayoutParams.MATCH_PARENT, 400);
             }
         }
 
