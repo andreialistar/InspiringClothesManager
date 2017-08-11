@@ -58,7 +58,7 @@ public class TrendingActivity extends AppCompatActivity implements
     }
 
     public void TrackScroll(MotionEvent event1, MotionEvent event2) {
-        int longScrollLimit = 600;
+        int longScrollLimit = 1000;
         if (Math.abs(event1.getY() - event2.getY()) > longScrollLimit && !hasIntent) {
             hasIntent = true;
             IntentManager.OpenActivity(this, VariantsActivity.class, null);

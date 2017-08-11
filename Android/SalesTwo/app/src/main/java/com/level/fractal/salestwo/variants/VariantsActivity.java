@@ -60,7 +60,8 @@ public class VariantsActivity extends AppCompatActivity implements
     }
 
     public void TrackScroll(MotionEvent event1, MotionEvent event2) {
-        if (Math.abs(event1.getY() - event2.getY()) > 600 && !hasIntent) {
+        int longScrollLimit = 1000;
+        if (Math.abs(event1.getY() - event2.getY()) > longScrollLimit && !hasIntent) {
             hasIntent = true;
             similarPager.setCurrentItem(similarPager.getCurrentItem() + (int)Math.signum(event1.getY() - event2.getY()));
         }
